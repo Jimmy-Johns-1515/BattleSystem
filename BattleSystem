@@ -1,0 +1,85 @@
+#include<iostream>
+using namespace std;
+
+void BattleSystem(); //declaration
+int MonsterGen();
+
+int PlayerHealth = 100; //global variables
+
+//game variables
+int main() {
+	int room = 1;
+	char input = 'a';
+	int PlayerHealth = 100;
+	
+	//game loop
+	while(input != 'q' && PlayerHealth >= 0) { //game quits if user types q or runs out of health
+		switch (room) {
+		case 1:
+			cout << "you're in room 1, you can go (s)outh" << endl;
+			cin >> input;
+			if (input == 's')
+				room = 2;
+		case 2:
+			BattleSystem();
+			cout << "you're in room 2, you can go (n)orth" << endl;
+			cin >> input;
+			if (input == 'n')
+				room = 1;
+			break;
+		}
+	}//end game loop
+}//end main
+
+//
+void BattleSystem() {
+	int MonsterType = MonsterGem();
+	int MonsterHealth = 0;
+	int MonsterDmg = 0;
+
+	//set monsters health depending on what type it is----------------------
+	if (Monstertype == 1) {
+		MonsterHealth = 30;
+	}
+	if (MonsterType == 2) {
+		MonsterHealth = 7;
+	}
+
+	//set the monster's damage depending on what type it is------------
+	if (MonsterType == 1) {
+		MonsterDmg = rand() % 20 + 1; //he'll hurt you between 1-20
+	}
+	//add damage for spider 5-10
+	if(MonsterType == 2) {
+		MonsterDmg = rand() % 6 + 5;
+	}
+
+	cout << "ouch!" << endl;
+	int MonsterHealth = 20;
+	while (MonsterHealth > 0 && PlayerHealth > 0) { //game loop for battle system-------------------
+			cout << "Monster bites you for "<<MonsterDmg<<" HP" << endl;
+			PlayerHealth -= 20;
+			PlayerDmg = rand() % 76; //your attack is between 0-75
+			cout << "you attack the mosnter for"<<PlayerDmg<<" HP" << endl << endl;
+				MonsterHealth -= 10;
+			system("pause");
+			cout << "your health is now " << PlayerHealth << ", and the monsters health is " << MonsterHealth << endl;
+
+	}
+	if (MonsterHealth <= 0)
+		cout << "you won!" << endl;
+	else
+		cout << "you died :(" << endl;
+}    
+int MonsterGen() {
+	int num = rand() % 100; //range of 0-99
+	if (num < 50) {
+		cout << "a skeleton appears" << endl;
+		return 1;
+	}
+	else {
+		cout << "a spider appears" << endl;
+		return 2;
+	}
+
+}
